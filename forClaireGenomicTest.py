@@ -163,7 +163,8 @@ with st.expander('new alleles selected'):
 df_test_w_edit=pd.merge(df_test,every_allele,how='left',on=['Sample ID','NCBI SNP Reference'])
 
 def see_if_new(x):
-    if x['New_Call'] is not None:
+
+    if not pd.isna(x['New_Call']):
         return x['New_Call']
     else:
         return x['Call']
