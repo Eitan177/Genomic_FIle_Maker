@@ -8,12 +8,13 @@ st.set_page_config(layout="wide")
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-    dataframe = pd.read_csv(uploaded_file,encoding='unicode_escape',skiprows=17)
-    st.write(dataframe)
+    df_test = pd.read_csv(uploaded_file,encoding='unicode_escape',skiprows=17,skipfooter=40)
+    
+else:
+    df_test=pd.read_csv('example_23JU069CH0002.csv',encoding='utf-8')
 
 
-df_test=pd.read_csv('example_23JU069CH0002.csv',encoding='utf-8')
-
+st.write(df_test)
 vkorc1=pd.read_csv('VKORC1_output.csv',encoding='utf-8')
 tpmt=pd.read_csv('TPMT_output.csv',encoding='utf-8')
 slco1b1=pd.read_csv('SLCO1B1_output.csv',encoding='utf-8')
