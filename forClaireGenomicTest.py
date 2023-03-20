@@ -22,8 +22,10 @@ nudt15=pd.read_csv('NUDT15_output.csv',encoding='utf-8')
 dpyd=pd.read_csv('DPYD_output.csv',encoding='utf-8')
 cyp3a5=pd.read_csv('CYP3A5_output.csv',encoding='utf-8')
 cyp2c19=pd.read_csv('CYP2C19_output.csv',encoding='utf-8')
+cyp2c9=pd.read_csv('CYP2C9_output.csv',encoding='utf-8')
 cyp2b6=pd.read_csv('CYP2B6_output.csv',encoding='utf-8')
 abcg2=pd.read_csv('ABCG2_output.csv',encoding='utf-8')
+
 
 with st.expander("test table"):
     st.dataframe(df_test,width=1000,height=1000)
@@ -95,7 +97,13 @@ with st.expander("genes with alleles"):
         st.dataframe(abcg2,width=1000)
     with col2:
         abcg2_allele_row=st.selectbox('select abcg2 row',abcg2.index)
-
+    st.write('CYP2C9')
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.dataframe(cyp2c9,width=1000)
+    with col2:
+        cyp2c9_allele_row=st.selectbox('select cyp2c9 row',cyp2c9.index)
 
 
 
@@ -156,7 +164,13 @@ abcg2_allele_selected=pd.DataFrame(abcg2_allele_selected).reset_index()
 abcg2_allele_selected.columns=['NCBI SNP Reference','New_Call']
 abcg2_allele_selected['Sample ID']=sample_substitute
 
-every_allele=pd.concat((vkorc1_allele_selected,tpmt_allele_selected,slco1b1_allele_selected,nudt15_allele_selected,dpyd_allele_selected,cyp3a5_allele_selected,cyp2c19_allele_selected,cyp2b6_allele_selected,abcg2_allele_selected))
+cyp2c9_allele_selected=cyp2c9.iloc[cyp2c9_allele_row]
+cyp2c9_allele_selected=pd.DataFrame(cyp2c9_allele_selected).reset_index()
+cyp2c9_allele_selected.columns=['NCBI SNP Reference','New_Call']
+cyp2c9_allele_selected['Sample ID']=sample_substitute
+
+
+every_allele=pd.concat((vkorc1_allele_selected,tpmt_allele_selected,slco1b1_allele_selected,nudt15_allele_selected,dpyd_allele_selected,cyp3a5_allele_selected,cyp2c19_allele_selected,cyp2b6_allele_selected,abcg2_allele_selected,cyp2c9_allele_selected))
 
 with st.expander('new alleles selected'):
     st.dataframe(every_allele,width=1000)
